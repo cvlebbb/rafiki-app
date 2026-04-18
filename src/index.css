@@ -1,0 +1,330 @@
+﻿@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@900&family=Space+Grotesk:wght@400;500;700&family=Syne:wght@800&display=swap");
+@import "leaflet/dist/leaflet.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bold-green: #00c851;
+  --neon-green: #39ff14;
+  --black: #080808;
+  --deep-black: #0a0a0a;
+  --magenta: #ff00aa;
+  --gold: #ffd700;
+  --card-bg: #111111;
+  --text-muted: #888888;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--deep-black);
+  color: #fff;
+  font-family: "Space Grotesk", "Segoe UI", sans-serif;
+}
+
+.font-display {
+  font-family: "Orbitron", "Space Grotesk", sans-serif;
+  font-weight: 900;
+}
+
+.font-title {
+  font-family: "Syne", "Space Grotesk", sans-serif;
+  font-weight: 800;
+}
+
+.mantra-tech {
+  font-family: "JetBrains Mono", "Courier New", monospace;
+}
+
+.landing-grid-bg {
+  position: relative;
+  overflow: hidden;
+}
+
+.landing-grid-bg::before {
+  content: "";
+  position: absolute;
+  inset: -120%;
+  background-image:
+    linear-gradient(rgba(0, 200, 81, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 200, 81, 0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+  animation: gridShift 16s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes gridShift {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-120px, 120px, 0);
+  }
+}
+
+.orb {
+  pointer-events: none;
+  position: fixed;
+  border-radius: 999px;
+  filter: blur(80px);
+  opacity: 0.35;
+  z-index: 0;
+  animation: floatOrb 7s ease-in-out infinite;
+}
+
+.orb-green {
+  width: 260px;
+  height: 260px;
+  left: -80px;
+  top: 120px;
+  background: var(--bold-green);
+}
+
+.orb-magenta {
+  width: 240px;
+  height: 240px;
+  right: -70px;
+  top: 300px;
+  background: var(--magenta);
+  animation-delay: -1.8s;
+}
+
+.orb-gold {
+  width: 220px;
+  height: 220px;
+  left: 42%;
+  bottom: -80px;
+  background: var(--gold);
+  animation-delay: -3s;
+}
+
+@keyframes floatOrb {
+  0%,
+  100% {
+    transform: translateY(0) translateX(0);
+  }
+  50% {
+    transform: translateY(-20px) translateX(12px);
+  }
+}
+
+.neon-green {
+  color: var(--neon-green);
+  text-shadow: 0 0 12px rgba(57, 255, 20, 0.8), 0 0 30px rgba(57, 255, 20, 0.45);
+}
+
+.neon-magenta {
+  color: var(--magenta);
+  text-shadow: 0 0 12px rgba(255, 0, 170, 0.8), 0 0 30px rgba(255, 0, 170, 0.4);
+}
+
+.btn-primary,
+.btn-outline,
+.btn-magenta,
+.btn-gold {
+  border-radius: 50px;
+  font-weight: 700;
+  transition: all 180ms ease;
+}
+
+.btn-primary {
+  background: var(--bold-green);
+  color: #000;
+  border: 1px solid rgba(0, 200, 81, 0.5);
+  box-shadow: 0 0 18px rgba(0, 200, 81, 0.28);
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 0 24px rgba(0, 200, 81, 0.42);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--bold-green);
+  border: 1px solid rgba(0, 200, 81, 0.5);
+}
+
+.btn-outline:hover {
+  background: rgba(0, 200, 81, 0.08);
+}
+
+.btn-magenta {
+  background: var(--magenta);
+  color: #080808;
+  border: 1px solid rgba(255, 0, 170, 0.5);
+  box-shadow: 0 0 18px rgba(255, 0, 170, 0.24);
+}
+
+.btn-gold {
+  background: var(--gold);
+  color: #080808;
+  border: 1px solid rgba(255, 215, 0, 0.5);
+}
+
+.rafiki-card {
+  background: #111;
+  border: 1px solid #1e1e1e;
+  border-radius: 20px;
+  transition: transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.rafiki-card:hover {
+  border-color: rgba(0, 200, 81, 0.4);
+  transform: translateY(-4px);
+  box-shadow: 0 16px 30px -18px rgba(0, 200, 81, 0.45);
+}
+
+.input-shell {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  color: #fff;
+  padding: 0.75rem 0.9rem;
+  width: 100%;
+}
+
+.input-shell:focus {
+  outline: none;
+  border-color: rgba(0, 200, 81, 0.8);
+  box-shadow: 0 0 0 3px rgba(0, 200, 81, 0.15);
+  background: rgba(0, 200, 81, 0.08);
+}
+
+.tag-green,
+.tag-magenta,
+.tag-gold,
+.tag-red {
+  border-radius: 999px;
+  border: 1px solid;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 0.35rem 0.6rem;
+}
+
+.tag-green {
+  color: var(--bold-green);
+  border-color: rgba(0, 200, 81, 0.5);
+  background: rgba(0, 200, 81, 0.12);
+}
+
+.tag-magenta {
+  color: var(--magenta);
+  border-color: rgba(255, 0, 170, 0.5);
+  background: rgba(255, 0, 170, 0.12);
+}
+
+.tag-gold {
+  color: var(--gold);
+  border-color: rgba(255, 215, 0, 0.5);
+  background: rgba(255, 215, 0, 0.12);
+}
+
+.tag-red {
+  color: #ff6b6b;
+  border-color: rgba(255, 80, 80, 0.5);
+  background: rgba(255, 60, 60, 0.14);
+}
+
+.deadline-fill {
+  background: linear-gradient(90deg, #00c851, #39ff14);
+}
+
+.mantra-shadow {
+  color: rgba(255, 255, 255, 0.08);
+}
+
+.mantra-gradient {
+  background: linear-gradient(90deg, var(--bold-green), var(--magenta), var(--gold), var(--neon-green));
+  -webkit-background-clip: text;
+  color: transparent;
+  background-size: 300% auto;
+  animation: mantraMove 6s linear infinite;
+}
+
+@keyframes mantraMove {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 300% 0;
+  }
+}
+
+.google-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: #171717;
+  color: #f1f1f1;
+  font-weight: 700;
+  padding: 0.75rem 1rem;
+}
+
+.google-btn:hover {
+  border-color: rgba(0, 200, 81, 0.5);
+}
+
+.dropdown-nav-item {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 230ms ease, transform 230ms ease, border-color 170ms ease;
+}
+
+.group:hover .dropdown-nav-item {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.toast-item {
+  animation: toastSlide 300ms ease;
+}
+
+@keyframes toastSlide {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.custom-leaflet-dot {
+  background: #00c851;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  box-shadow: 0 0 12px rgba(0, 200, 81, 0.8);
+}
+
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
