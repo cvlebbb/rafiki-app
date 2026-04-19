@@ -121,7 +121,7 @@ export const useAuthStore = create((set, get) => ({
     const { error } = await client.auth.signInWithOAuth({
       provider: "google",
       options: {
-        redirectTo: `${window.location.origin}/app/discover`
+        redirectTo: `${window.location.origin}/auth/callback`
       }
     });
     set({ loading: false });
