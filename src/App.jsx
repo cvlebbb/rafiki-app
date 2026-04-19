@@ -32,10 +32,8 @@ export default function App() {
           <Route path="/" element={<LandingPage />} />
           <Route path="/login" element={<AuthPage mode="login" />} />
           <Route path="/signup" element={<AuthPage mode="signup" />} />
-          
-          {/* 👇 ADD THIS AUTH CALLBACK ROUTE */}
           <Route path="/auth/callback" element={<AuthCallback />} />
-
+          
           <Route
             path="/app"
             element={
