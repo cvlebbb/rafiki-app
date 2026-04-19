@@ -4,7 +4,30 @@ import { categories } from "../data/mockData";
 import { useAppState } from "../state/AppState";
 import HangoutCard from "../components/HangoutCard";
 import HangoutDetailModal from "../components/HangoutDetailModal";
+'use client'
+import { useEffect } from 'react'
+import { useRouter } from 'next/navigation'
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 
+export default function DiscoverPage() {
+  const router = useRouter()
+  const supabase = createClientComponentClient()
+
+  useEffect(() => {
+    // Get the session from the URL fragment
+    const handleAuth = async () => {
+      const { data: { session } } = await supabase.auth.getSession()
+      if (session) {
+        // Success! Redirect to your actual dashboard
+        router.push('/dashboard') // or wherever users should go
+      }
+    }
+    
+    handleAuth()
+  }, [supabase, router])
+
+  return <div>Loading...</div>
+}
 function byFilter(hangout, filter) {
   if (filter === "All") return true;
   if (filter === "Today") {
