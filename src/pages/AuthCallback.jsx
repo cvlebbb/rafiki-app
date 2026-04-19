@@ -1,7 +1,7 @@
 // src/pages/AuthCallback.jsx
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { supabase } from "../lib/supabase"; // Adjust path to your supabase client
+import { supabase } from "../lib/supabaseClient"; // Adjust path to your supabase client
 import { useAuthStore } from "../stores/useAuthStore";
 
 export default function AuthCallback() {
