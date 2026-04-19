@@ -1,4 +1,4 @@
-﻿import { useEffect } from "react";
+import { useEffect } from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import LandingPage from "./pages/LandingPage";
 import AuthPage from "./pages/AuthPage";
@@ -10,26 +10,8 @@ import CreatePage from "./pages/app/CreatePage";
 import ChatsPage from "./pages/app/ChatsPage";
 import ProfilePage from "./pages/app/ProfilePage";
 import SettingsPage from "./pages/app/SettingsPage";
+import AuthCallback from "./pages/AuthCallback"; // 👈 ADD THIS IMPORT
 import { useAuthStore } from "./stores/useAuthStore";
-// src/App.jsx
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import DiscoverPage from './pages/DiscoverPage';
-import AuthCallback from './pages/AuthCallback';
-// ... other imports
-
-function App() {
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/auth/callback" element={<AuthCallback />} />
-        <Route path="/app/discover" element={<DiscoverPage />} />
-        {/* ... other routes */}
-      </Routes>
-    </BrowserRouter>
-  );
-}
 
 function AppBootstrap({ children }) {
   const { initAuth, stopAuthListener } = useAuthStore();
@@ -50,6 +32,9 @@ export default function App() {
           <Route path="/" element={<LandingPage />} />
           <Route path="/login" element={<AuthPage mode="login" />} />
           <Route path="/signup" element={<AuthPage mode="signup" />} />
+          
+          {/* 👇 ADD THIS AUTH CALLBACK ROUTE */}
+          <Route path="/auth/callback" element={<AuthCallback />} />
 
           <Route
             path="/app"
