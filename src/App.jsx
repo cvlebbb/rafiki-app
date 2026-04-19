@@ -11,6 +11,8 @@ import ChatsPage from "./pages/app/ChatsPage";
 import ProfilePage from "./pages/app/ProfilePage";
 import SettingsPage from "./pages/app/SettingsPage";
 import { useAuthStore } from "./stores/useAuthStore";
+import { useRouter } from 'next/navigation';
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 
 function AppBootstrap({ children }) {
   const { initAuth, stopAuthListener } = useAuthStore();
